@@ -1,11 +1,10 @@
 import { format } from "date-fns";
 
-import { appConfig } from "@/config";
 import type { TimeSlotAvailability } from "@/types/booking";
 import type { Service } from "@/types/service";
 
 export async function getAvailableTimeSlots(date: string) {
-  const url = `${appConfig.apiRoutes.timeSlots}?date=${encodeURIComponent(date)}`;
+  const url = `/api/time-slots?date=${encodeURIComponent(date)}`;
   console.log("getAvailableTimeSlots url", url);
 
   const response = await fetch(url, { cache: "no-store" });
