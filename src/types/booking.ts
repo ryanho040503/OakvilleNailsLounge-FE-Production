@@ -13,7 +13,7 @@ export interface Booking {
   appointment_date: string;
   appointment_time: string;
   status: BookingStatus;
-  notes?: string;
+  notes?: string | null;
   created_at: string;
 }
 
