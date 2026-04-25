@@ -115,8 +115,8 @@ async function getNextNumericKey(
     throw new Error(`Unable to read ${table}.${keyColumn} for key generation.`);
   }
 
-  return data && data.length > 0
-    ? Number((data[0] as Record<string, number | string | null>)[keyColumn] ?? 0) + 1
+  return data && Array.isArray(data) && data.length > 0
+    ? Number((data[0] as unknown as Record<string, number | string | null>)[keyColumn] ?? 0) + 1
     : 1;
 }
 
