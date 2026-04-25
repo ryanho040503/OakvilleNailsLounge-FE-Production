@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "express",
   "version": "1.0.0",
   "description": "",
@@ -12,5 +13,44 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0"
+=======
+  "name": "oakville-nails-lounge-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 4000",
+    "build": "next build",
+    "start": "next start -p 4000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@supabase/supabase-js": "^2.49.8",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^0.511.0",
+    "next": "^15.3.1",
+    "nodemailer": "^8.0.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.4",
+    "sonner": "^2.0.5",
+    "tailwind-merge": "^3.3.0",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.25.1",
+    "eslint-config-next": "^15.3.1",
+    "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.8.3"
+>>>>>>> 2b6dbdc (First Deploy (Working))
   }
 }
