@@ -73,6 +73,7 @@ export function BookingForm({
       setIsLoadingSlots(true);
 
       try {
+        console.log("Loading time slots", { appointmentDate, initialDate });
         const slots = await getAvailableTimeSlots(appointmentDate || initialDate);
 
         if (!isActive) {
@@ -85,6 +86,8 @@ export function BookingForm({
           form.setValue("appointmentTime", "");
         }
       } catch (error) {
+        console.error("loadSlots error", error);
+
         if (!isActive) {
           return;
         }

@@ -5,15 +5,22 @@ import type { TimeSlotAvailability } from "@/types/booking";
 import type { Service } from "@/types/service";
 
 export async function getAvailableTimeSlots(date: string) {
-  const response = await fetch(
-    `${appConfig.apiRoutes.timeSlots}?date=${encodeURIComponent(date)}`,
-    { cache: "no-store" },
-  );
+  const url = `${appConfig.apiRoutes.timeSlots}?date=${encodeURIComponent(date)}`;
+  console.log("getAvailableTimeSlots url", url);
+
+  const response = await fetch(url, { cache: "no-store" });
   const payload = (await response.json()) as {
     success?: boolean;
     message?: string;
     data?: TimeSlotAvailability[];
   };
+
+  console.log("getAvailableTimeSlots response", {
+    url,
+    status: response.status,
+    ok: response.ok,
+    payload,
+  });
 
   if (!response.ok || !payload.success || !payload.data) {
     throw new Error(payload.message || "Unable to load time slots.");
