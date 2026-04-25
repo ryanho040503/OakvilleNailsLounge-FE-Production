@@ -6,7 +6,7 @@ import type { Service } from "@/types/service";
 
 export async function getAvailableTimeSlots(date: string) {
   const response = await fetch(
-    `${appConfig.apiBaseUrl || ""}/time-slots?date=${encodeURIComponent(date)}`,
+    `${appConfig.apiRoutes.timeSlots}?date=${encodeURIComponent(date)}`,
     { cache: "no-store" },
   );
   const payload = (await response.json()) as {
