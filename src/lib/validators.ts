@@ -1,6 +1,19 @@
 import { isBefore, startOfDay } from "date-fns";
 import { z } from "zod";
 
+function parseDateInput(value: string) {
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
+  if (!match) {
+    return null;
+  }
+
+  const [, yearText, monthText, dayText] = match;
+  const parsedDate = new Date(Number(yearText), Number(monthText) - 1, Number(dayText));
+
+  return Number.isNaN(parsedDate.getTime()) ? null : parsedDate;
+}
+
 function isValidTimeSlot(value: string) {
   const match = value.match(/^(\d{1,2}):(\d{2}) (AM|PM)$/);
 
@@ -31,10 +44,14 @@ export const bookingSchema = z.object({
   appointmentDate: z
     .string()
     .min(1, "Please choose a date.")
-    .refine((value) => !Number.isNaN(new Date(value).getTime()), {
+    .refine((value) => parseDateInput(value) !== null, {
       message: "Please choose a valid date.",
     })
-    .refine((value) => !isBefore(new Date(value), startOfDay(new Date())), {
+    .refine((value) => {
+      const parsedDate = parseDateInput(value);
+
+      return parsedDate !== null && !isBefore(parsedDate, startOfDay(new Date()));
+    }, {
       message: "Please choose today or a future date.",
     }),
   appointmentTime: z

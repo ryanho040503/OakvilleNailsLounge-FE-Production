@@ -12,6 +12,7 @@ function getBackendApiBaseUrl() {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const date = searchParams.get("date");
+  const staffId = searchParams.get("staffId");
 
   if (!date || Number.isNaN(new Date(date).getTime())) {
     return NextResponse.json(
@@ -36,7 +37,15 @@ export async function GET(request: Request) {
   }
 
   try {
-    const response = await fetch(`${apiBaseUrl}/time-slots?date=${encodeURIComponent(date)}`, {
+    const backendParams = new URLSearchParams({
+      date,
+    });
+
+    if (staffId) {
+      backendParams.set("staffId", staffId);
+    }
+
+    const response = await fetch(`${apiBaseUrl}/time-slots?${backendParams.toString()}`, {
       cache: "no-store",
     });
     const payload = await response.json();

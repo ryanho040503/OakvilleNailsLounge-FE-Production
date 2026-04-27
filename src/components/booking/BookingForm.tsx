@@ -30,6 +30,21 @@ function findServiceById(serviceId: string | null | undefined, services: Service
   return services.find((service) => service.id === serviceId);
 }
 
+function formatDurationLabel(totalMinutes: number) {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  if (hours === 0) {
+    return `${minutes} min`;
+  }
+
+  if (minutes === 0) {
+    return `${hours} hr`;
+  }
+
+  return `${hours} hr ${minutes} min`;
+}
+
 export function BookingForm({
   featuredDates,
   selectedServiceId,
@@ -63,6 +78,7 @@ export function BookingForm({
   });
 
   const appointmentDate = form.watch("appointmentDate");
+  const selectedStaffId = form.watch("staffId");
   const selectedServiceIds = form.watch("serviceIds") || [];
   const bookingSummary = getBookingSummary(selectedServiceIds, services);
 
@@ -74,7 +90,7 @@ export function BookingForm({
 
       try {
         console.log("Loading time slots", { appointmentDate, initialDate });
-        const slots = await getAvailableTimeSlots(appointmentDate || initialDate);
+        const slots = await getAvailableTimeSlots(appointmentDate || initialDate, selectedStaffId);
 
         if (!isActive) {
           return;
@@ -107,7 +123,7 @@ export function BookingForm({
     return () => {
       isActive = false;
     };
-  }, [appointmentDate, form, initialDate]);
+  }, [appointmentDate, form, initialDate, selectedStaffId]);
 
   const onSubmit = form.handleSubmit(async (values) => {
     setIsSubmitting(true);
@@ -173,31 +189,40 @@ export function BookingForm({
         <div className="mt-8 space-y-4">
           <div className="rounded-[1.5rem] bg-[#fcf5ef] p-5">
             <p className="text-xs uppercase tracking-[0.2em] text-primary/70">Selected Services</p>
-            <p className="mt-2 text-xl">
-              {bookingSummary.selectedServices.length > 0
-                ? bookingSummary.selectedServices.map((service) => service.name).join(", ")
-                : "Choose one or more services below"}
-            </p>
             <p className="mt-2 text-sm text-foreground/70">
               {bookingSummary.selectedServices.length > 0
-                ? `${bookingSummary.totalDuration} min total · $${bookingSummary.totalPrice}`
-                : "Service count, total time, and pricing will appear here."}
+                ? `${formatDurationLabel(bookingSummary.totalDuration)} total · $${bookingSummary.totalPrice}`
+                : "Choose one or more services below to see the booked service details here."}
             </p>
-          </div>
-
-          <div className="rounded-[1.5rem] bg-[#fffaf6] p-5">
-            <p className="text-xs uppercase tracking-[0.2em] text-primary/70">Popular Dates</p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {featuredDates.map((date) => (
-                <button
-                  key={date}
-                  type="button"
-                  onClick={() => form.setValue("appointmentDate", date, { shouldValidate: true })}
-                  className="rounded-full border border-primary/10 px-3 py-2 text-xs font-medium hover:border-primary/35"
-                >
-                  {format(new Date(date), "MMM d")}
-                </button>
-              ))}
+            <div className="mt-4 space-y-3">
+              {bookingSummary.selectedServices.length > 0 ? (
+                bookingSummary.selectedServices.map((service) => (
+                  <div
+                    key={service.id}
+                    className="rounded-[1.25rem] border border-primary/10 bg-white/80 px-4 py-3"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">{service.name}</p>
+                        <p className="mt-1 text-xs uppercase tracking-[0.18em] text-primary/65">
+                          {service.category}
+                        </p>
+                      </div>
+                      <p className="shrink-0 text-sm font-semibold text-primary">
+                        ${service.price.toFixed(2)}
+                      </p>
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-foreground/70">{service.description}</p>
+                    <p className="mt-2 text-xs font-medium uppercase tracking-[0.16em] text-foreground/55">
+                      {service.duration_minutes} min
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <div className="rounded-[1.25rem] border border-dashed border-primary/20 bg-white/60 px-4 py-4 text-sm text-foreground/65">
+                  No services selected yet.
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -210,111 +235,109 @@ export function BookingForm({
             <h2 className="mt-4 text-3xl">Reserve your preferred appointment request</h2>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2">
-            <div className="space-y-2">
-              <p className="text-sm font-semibold">Services</p>
-              <div className="space-y-3">
-                {serviceCategories.map((category, index) => {
-                  const categoryServices = services.filter((service) => service.category === category);
+          <div className="space-y-2">
+            <p className="text-sm font-semibold">Staff Preference</p>
+            <div className="grid gap-3">
+              <button
+                type="button"
+                onClick={() => form.setValue("staffId", "", { shouldValidate: true })}
+                className={`rounded-[1.25rem] border px-4 py-3 text-left transition ${
+                  !form.watch("staffId")
+                    ? "border-primary bg-primary text-white"
+                    : "border-primary/10 bg-white hover:border-primary/35 hover:bg-secondary/35"
+                }`}
+              >
+                <span className="block text-sm font-semibold">No preference</span>
+                <span className={`block text-sm ${!form.watch("staffId") ? "text-white/80" : "text-foreground/70"}`}>
+                  We will assign an available technician.
+                </span>
+              </button>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                {staff.map((member) => {
+                  const selected = form.watch("staffId") === member.id;
 
                   return (
-                    <details
-                      key={category}
-                      open={index < 2}
-                      className="overflow-hidden rounded-[1.5rem] border border-primary/10 bg-white"
+                    <button
+                      key={member.id}
+                      type="button"
+                      onClick={() => form.setValue("staffId", member.id, { shouldValidate: true })}
+                      className={`rounded-[1.25rem] border px-4 py-4 text-left transition ${
+                        selected
+                          ? "border-primary bg-primary text-white"
+                          : "border-primary/10 bg-white hover:border-primary/35 hover:bg-secondary/35"
+                      }`}
                     >
-                      <summary className="cursor-pointer list-none px-5 py-4 text-sm font-semibold text-foreground">
-                        <div className="flex items-center justify-between gap-4">
-                          <span>{category}</span>
-                          <span className="text-xs uppercase tracking-[0.2em] text-primary/65">
-                            {categoryServices.length} services
-                          </span>
-                        </div>
-                      </summary>
-                      <div className="grid gap-px bg-primary/10">
-                        {categoryServices.map((service) => (
-                          <label
-                            key={service.id}
-                            className="flex cursor-pointer items-start justify-between gap-4 bg-white px-4 py-3 transition hover:bg-secondary/35"
-                          >
-                            <span className="flex min-w-0 items-start gap-3">
-                              <input
-                                type="checkbox"
-                                checked={selectedServiceIds.includes(service.id)}
-                                onChange={(event) => {
-                                  const nextServiceIds = event.target.checked
-                                    ? [...selectedServiceIds, service.id]
-                                    : selectedServiceIds.filter((id) => id !== service.id);
-
-                                  form.setValue("serviceIds", nextServiceIds, { shouldValidate: true });
-                                }}
-                                className="mt-1 h-4 w-4 rounded border-primary/30 text-primary focus:ring-primary"
-                              />
-                              <span className="min-w-0">
-                                <span className="block text-sm font-semibold">{service.name}</span>
-                                <span className="block text-sm text-foreground/70">
-                                  {service.duration_minutes} min
-                                </span>
-                              </span>
-                            </span>
-                            <span className="shrink-0 text-sm font-semibold text-primary">
-                              ${service.price.toFixed(2)}
-                            </span>
-                          </label>
-                        ))}
-                      </div>
-                    </details>
+                      <span className="block text-sm font-semibold uppercase tracking-[0.08em]">
+                        {member.name}
+                      </span>
+                      <span className={`mt-1 block text-sm ${selected ? "text-white/80" : "text-foreground/70"}`}>
+                        {member.role}
+                      </span>
+                    </button>
                   );
                 })}
               </div>
-              <p className="text-sm text-red-600">{form.formState.errors.serviceIds?.message}</p>
             </div>
+          </div>
 
-            <div className="space-y-2">
-              <p className="text-sm font-semibold">Staff Preference</p>
-              <div className="grid gap-3">
-                <button
-                  type="button"
-                  onClick={() => form.setValue("staffId", "", { shouldValidate: true })}
-                  className={`rounded-[1.25rem] border px-4 py-3 text-left transition ${
-                    !form.watch("staffId")
-                      ? "border-primary bg-primary text-white"
-                      : "border-primary/10 bg-white hover:border-primary/35 hover:bg-secondary/35"
-                  }`}
-                >
-                  <span className="block text-sm font-semibold">No preference</span>
-                  <span className={`block text-sm ${!form.watch("staffId") ? "text-white/80" : "text-foreground/70"}`}>
-                    We will assign an available technician.
-                  </span>
-                </button>
+          <div className="space-y-2">
+            <p className="text-sm font-semibold">Services</p>
+            <div className="space-y-3">
+              {serviceCategories.map((category, index) => {
+                const categoryServices = services.filter((service) => service.category === category);
 
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {staff.map((member) => {
-                    const selected = form.watch("staffId") === member.id;
-
-                    return (
-                      <button
-                        key={member.id}
-                        type="button"
-                        onClick={() => form.setValue("staffId", member.id, { shouldValidate: true })}
-                        className={`rounded-[1.25rem] border px-4 py-4 text-left transition ${
-                          selected
-                            ? "border-primary bg-primary text-white"
-                            : "border-primary/10 bg-white hover:border-primary/35 hover:bg-secondary/35"
-                        }`}
-                      >
-                        <span className="block text-sm font-semibold uppercase tracking-[0.08em]">
-                          {member.name}
+                return (
+                  <details
+                    key={category}
+                    open={index < 2}
+                    className="overflow-hidden rounded-[1.5rem] border border-primary/10 bg-white"
+                  >
+                    <summary className="cursor-pointer list-none px-5 py-4 text-sm font-semibold text-foreground">
+                      <div className="flex items-center justify-between gap-4">
+                        <span>{category}</span>
+                        <span className="text-xs uppercase tracking-[0.2em] text-primary/65">
+                          {categoryServices.length} services
                         </span>
-                        <span className={`mt-1 block text-sm ${selected ? "text-white/80" : "text-foreground/70"}`}>
-                          {member.role}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
+                      </div>
+                    </summary>
+                    <div className="grid gap-px bg-primary/10">
+                      {categoryServices.map((service) => (
+                        <label
+                          key={service.id}
+                          className="flex cursor-pointer items-start justify-between gap-4 bg-white px-4 py-3 transition hover:bg-secondary/35"
+                        >
+                          <span className="flex min-w-0 items-start gap-3">
+                            <input
+                              type="checkbox"
+                              checked={selectedServiceIds.includes(service.id)}
+                              onChange={(event) => {
+                                const nextServiceIds = event.target.checked
+                                  ? [...selectedServiceIds, service.id]
+                                  : selectedServiceIds.filter((id) => id !== service.id);
+
+                                form.setValue("serviceIds", nextServiceIds, { shouldValidate: true });
+                              }}
+                              className="mt-1 h-4 w-4 rounded border-primary/30 text-primary focus:ring-primary"
+                            />
+                            <span className="min-w-0">
+                              <span className="block text-sm font-semibold">{service.name}</span>
+                              <span className="block text-sm text-foreground/70">
+                                {service.duration_minutes} min
+                              </span>
+                            </span>
+                          </span>
+                          <span className="shrink-0 text-sm font-semibold text-primary">
+                            ${service.price.toFixed(2)}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </details>
+                );
+              })}
             </div>
+            <p className="text-sm text-red-600">{form.formState.errors.serviceIds?.message}</p>
           </div>
         </div>
 

@@ -3,8 +3,16 @@ import { format } from "date-fns";
 import type { TimeSlotAvailability } from "@/types/booking";
 import type { Service } from "@/types/service";
 
-export async function getAvailableTimeSlots(date: string) {
-  const url = `/api/time-slots?date=${encodeURIComponent(date)}`;
+export async function getAvailableTimeSlots(date: string, staffId?: string) {
+  const params = new URLSearchParams({
+    date,
+  });
+
+  if (staffId) {
+    params.set("staffId", staffId);
+  }
+
+  const url = `/api/time-slots?${params.toString()}`;
   console.log("getAvailableTimeSlots url", url);
 
   const response = await fetch(url, { cache: "no-store" });
