@@ -23,10 +23,10 @@ export function TimeSlotPicker({ slots, selectedSlot, onSelect }: TimeSlotPicker
           className={cn(
             "rounded-2xl border px-4 py-3 text-sm font-medium transition",
             slot.booked
-              ? "cursor-not-allowed border-red-200 bg-red-50 text-red-500"
+              ? "cursor-not-allowed border-red-500/30 bg-red-500/10 text-red-300"
               : selectedSlot === slot.time
-              ? "border-primary bg-primary text-white"
-              : "border-primary/10 bg-white text-foreground hover:border-primary/35 hover:bg-secondary/50",
+              ? "border-primary bg-primary text-[#24160b]"
+              : "border-primary/15 bg-[#17110d] text-[#f6e5c9] hover:border-primary/35 hover:bg-[#211711]",
           )}
         >
           {slot.time}

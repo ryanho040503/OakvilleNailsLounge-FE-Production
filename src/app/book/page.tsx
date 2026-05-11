@@ -22,8 +22,8 @@ export default async function BookPage({ searchParams }: BookPageProps) {
       <section className="container-shell py-12 lg:py-20">
         <div className="mb-10 space-y-4">
           <p className="section-eyebrow">Booking</p>
-          <h1 className="section-title max-w-3xl">Choose one or more services, select a time, and send us your appointment request.</h1>
-          <p className="max-w-2xl text-base leading-8 text-foreground/75">
+          <h1 className="section-title max-w-3xl text-[#f6e5c9]">Choose one or more services, select a time, and send us your appointment request.</h1>
+          <p className="max-w-2xl text-base leading-8 text-[#f4e1c6]/68">
             {selectedService
               ? `You arrived from ${selectedService.name}. We preloaded it into the form for you, and you can add more services before submitting.`
               : "Pick one or more active services below and we will hold the request as pending until confirmed."}

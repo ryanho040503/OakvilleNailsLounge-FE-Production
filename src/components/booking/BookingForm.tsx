@@ -180,16 +180,16 @@ export function BookingForm({
     <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr]">
       <aside className="glass-panel h-fit p-6 sm:p-8">
         <p className="section-eyebrow">Appointment Summary</p>
-        <h2 className="mt-4 text-3xl">Plan your visit</h2>
-        <p className="mt-4 text-sm leading-7 text-foreground/75">
+        <h2 className="mt-4 text-3xl text-[#f6e5c9]">Plan your visit</h2>
+        <p className="mt-4 text-sm leading-7 text-[#f4e1c6]/68">
           Choose your services, add your preferred artist if you have one, then submit your request. New bookings are
           saved as pending until the salon confirms.
         </p>
 
         <div className="mt-8 space-y-4">
-          <div className="rounded-[1.5rem] bg-[#fcf5ef] p-5">
+          <div className="rounded-[1.5rem] border border-primary/12 bg-[linear-gradient(180deg,rgba(34,24,18,0.96),rgba(18,12,9,0.96))] p-5">
             <p className="text-xs uppercase tracking-[0.2em] text-primary/70">Selected Services</p>
-            <p className="mt-2 text-sm text-foreground/70">
+            <p className="mt-2 text-sm text-[#f4e1c6]/68">
               {bookingSummary.selectedServices.length > 0
                 ? `${formatDurationLabel(bookingSummary.totalDuration)} total · $${bookingSummary.totalPrice}`
                 : "Choose one or more services below to see the booked service details here."}
@@ -199,11 +199,11 @@ export function BookingForm({
                 bookingSummary.selectedServices.map((service) => (
                   <div
                     key={service.id}
-                    className="rounded-[1.25rem] border border-primary/10 bg-white/80 px-4 py-3"
+                    className="rounded-[1.25rem] border border-primary/12 bg-[#140f0c] px-4 py-3"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <p className="text-sm font-semibold text-foreground">{service.name}</p>
+                        <p className="text-sm font-semibold text-[#f6e5c9]">{service.name}</p>
                         <p className="mt-1 text-xs uppercase tracking-[0.18em] text-primary/65">
                           {service.category}
                         </p>
@@ -212,14 +212,14 @@ export function BookingForm({
                         ${service.price.toFixed(2)}
                       </p>
                     </div>
-                    <p className="mt-2 text-sm leading-6 text-foreground/70">{service.description}</p>
-                    <p className="mt-2 text-xs font-medium uppercase tracking-[0.16em] text-foreground/55">
+                    <p className="mt-2 text-sm leading-6 text-[#f4e1c6]/68">{service.description}</p>
+                    <p className="mt-2 text-xs font-medium uppercase tracking-[0.16em] text-[#f4e1c6]/45">
                       {service.duration_minutes} min
                     </p>
                   </div>
                 ))
               ) : (
-                <div className="rounded-[1.25rem] border border-dashed border-primary/20 bg-white/60 px-4 py-4 text-sm text-foreground/65">
+                <div className="rounded-[1.25rem] border border-dashed border-primary/20 bg-[#140f0c] px-4 py-4 text-sm text-[#f4e1c6]/58">
                   No services selected yet.
                 </div>
               )}
@@ -232,23 +232,23 @@ export function BookingForm({
         <div className="space-y-4">
           <div>
             <p className="section-eyebrow">Booking Form</p>
-            <h2 className="mt-4 text-3xl">Reserve your preferred appointment request</h2>
+            <h2 className="mt-4 text-3xl text-[#f6e5c9]">Reserve your preferred appointment request</h2>
           </div>
 
           <div className="space-y-2">
-            <p className="text-sm font-semibold">Staff Preference</p>
+            <p className="text-sm font-semibold text-[#f6e5c9]">Staff Preference</p>
             <div className="grid gap-3">
               <button
                 type="button"
                 onClick={() => form.setValue("staffId", "", { shouldValidate: true })}
                 className={`rounded-[1.25rem] border px-4 py-3 text-left transition ${
                   !form.watch("staffId")
-                    ? "border-primary bg-primary text-white"
-                    : "border-primary/10 bg-white hover:border-primary/35 hover:bg-secondary/35"
+                    ? "border-primary bg-primary text-[#24160b]"
+                    : "border-primary/12 bg-[#17110d] text-[#f6e5c9] hover:border-primary/35 hover:bg-[#211711]"
                 }`}
               >
                 <span className="block text-sm font-semibold">No preference</span>
-                <span className={`block text-sm ${!form.watch("staffId") ? "text-white/80" : "text-foreground/70"}`}>
+                <span className={`block text-sm ${!form.watch("staffId") ? "text-[#24160b]/75" : "text-[#f4e1c6]/62"}`}>
                   We will assign an available technician.
                 </span>
               </button>
@@ -264,14 +264,14 @@ export function BookingForm({
                       onClick={() => form.setValue("staffId", member.id, { shouldValidate: true })}
                       className={`rounded-[1.25rem] border px-4 py-4 text-left transition ${
                         selected
-                          ? "border-primary bg-primary text-white"
-                          : "border-primary/10 bg-white hover:border-primary/35 hover:bg-secondary/35"
+                          ? "border-primary bg-primary text-[#24160b]"
+                          : "border-primary/12 bg-[#17110d] text-[#f6e5c9] hover:border-primary/35 hover:bg-[#211711]"
                       }`}
                     >
                       <span className="block text-sm font-semibold uppercase tracking-[0.08em]">
                         {member.name}
                       </span>
-                      <span className={`mt-1 block text-sm ${selected ? "text-white/80" : "text-foreground/70"}`}>
+                      <span className={`mt-1 block text-sm ${selected ? "text-[#24160b]/75" : "text-[#f4e1c6]/62"}`}>
                         {member.role}
                       </span>
                     </button>
@@ -282,7 +282,7 @@ export function BookingForm({
           </div>
 
           <div className="space-y-2">
-            <p className="text-sm font-semibold">Services</p>
+            <p className="text-sm font-semibold text-[#f6e5c9]">Services</p>
             <div className="space-y-3">
               {serviceCategories.map((category, index) => {
                 const categoryServices = services.filter((service) => service.category === category);
@@ -291,9 +291,9 @@ export function BookingForm({
                   <details
                     key={category}
                     open={index < 2}
-                    className="overflow-hidden rounded-[1.5rem] border border-primary/10 bg-white"
+                    className="overflow-hidden rounded-[1.5rem] border border-primary/12 bg-[#17110d]"
                   >
-                    <summary className="cursor-pointer list-none px-5 py-4 text-sm font-semibold text-foreground">
+                    <summary className="cursor-pointer list-none px-5 py-4 text-sm font-semibold text-[#f6e5c9]">
                       <div className="flex items-center justify-between gap-4">
                         <span>{category}</span>
                         <span className="text-xs uppercase tracking-[0.2em] text-primary/65">
@@ -305,7 +305,7 @@ export function BookingForm({
                       {categoryServices.map((service) => (
                         <label
                           key={service.id}
-                          className="flex cursor-pointer items-start justify-between gap-4 bg-white px-4 py-3 transition hover:bg-secondary/35"
+                          className="flex cursor-pointer items-start justify-between gap-4 bg-[#120d0a] px-4 py-3 transition hover:bg-[#1d140f]"
                         >
                           <span className="flex min-w-0 items-start gap-3">
                             <input
@@ -321,8 +321,8 @@ export function BookingForm({
                               className="mt-1 h-4 w-4 rounded border-primary/30 text-primary focus:ring-primary"
                             />
                             <span className="min-w-0">
-                              <span className="block text-sm font-semibold">{service.name}</span>
-                              <span className="block text-sm text-foreground/70">
+                              <span className="block text-sm font-semibold text-[#f6e5c9]">{service.name}</span>
+                              <span className="block text-sm text-[#f4e1c6]/62">
                                 {service.duration_minutes} min
                               </span>
                             </span>
@@ -343,7 +343,7 @@ export function BookingForm({
 
         <div className="grid gap-5 md:grid-cols-2">
           <div className="space-y-2">
-            <label htmlFor="appointmentDate" className="text-sm font-semibold">
+            <label htmlFor="appointmentDate" className="text-sm font-semibold text-[#f6e5c9]">
               Appointment Date
             </label>
             <input
@@ -351,27 +351,27 @@ export function BookingForm({
               type="date"
               min={format(new Date(), "yyyy-MM-dd")}
               {...form.register("appointmentDate")}
-              className="w-full rounded-2xl border border-primary/10 bg-white px-4 py-3 outline-none transition focus:border-primary"
+              className="w-full rounded-2xl border border-primary/12 bg-[#17110d] px-4 py-3 text-[#f6e5c9] outline-none transition focus:border-primary"
             />
             <p className="text-sm text-red-600">{form.formState.errors.appointmentDate?.message}</p>
           </div>
 
           <div className="space-y-2">
-            <p className="text-sm font-semibold">Time Slot</p>
+            <p className="text-sm font-semibold text-[#f6e5c9]">Time Slot</p>
             <TimeSlotPicker
               slots={availableSlots}
               selectedSlot={form.watch("appointmentTime")}
               onSelect={(slot) => form.setValue("appointmentTime", slot, { shouldValidate: true })}
             />
             {isLoadingSlots ? (
-              <p className="text-xs leading-6 text-foreground/65">Loading available time slots...</p>
+              <p className="text-xs leading-6 text-[#f4e1c6]/58">Loading available time slots...</p>
             ) : null}
             {!isLoadingSlots && availableSlots.some((slot) => slot.booked) ? (
-              <p className="text-xs leading-6 text-foreground/65">
+              <p className="text-xs leading-6 text-[#f4e1c6]/58">
                 Red time slots are already booked and cannot be selected.
               </p>
             ) : null}
-            <p className="text-xs leading-6 text-foreground/65">
+            <p className="text-xs leading-6 text-[#f4e1c6]/58">
               Available booking start times run from 9:00 AM through 8:00 PM.
             </p>
             <p className="text-sm text-red-600">{form.formState.errors.appointmentTime?.message}</p>
@@ -380,64 +380,64 @@ export function BookingForm({
 
         <div className="grid gap-5 md:grid-cols-2">
           <div className="space-y-2">
-            <label htmlFor="firstName" className="text-sm font-semibold">
+            <label htmlFor="firstName" className="text-sm font-semibold text-[#f6e5c9]">
               First Name
             </label>
             <input
               id="firstName"
               {...form.register("firstName")}
-              className="w-full rounded-2xl border border-primary/10 bg-white px-4 py-3 outline-none transition focus:border-primary"
+              className="w-full rounded-2xl border border-primary/12 bg-[#17110d] px-4 py-3 text-[#f6e5c9] outline-none transition focus:border-primary"
             />
             <p className="text-sm text-red-600">{form.formState.errors.firstName?.message}</p>
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="lastName" className="text-sm font-semibold">
+            <label htmlFor="lastName" className="text-sm font-semibold text-[#f6e5c9]">
               Last Name
             </label>
             <input
               id="lastName"
               {...form.register("lastName")}
-              className="w-full rounded-2xl border border-primary/10 bg-white px-4 py-3 outline-none transition focus:border-primary"
+              className="w-full rounded-2xl border border-primary/12 bg-[#17110d] px-4 py-3 text-[#f6e5c9] outline-none transition focus:border-primary"
             />
             <p className="text-sm text-red-600">{form.formState.errors.lastName?.message}</p>
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="phone" className="text-sm font-semibold">
+            <label htmlFor="phone" className="text-sm font-semibold text-[#f6e5c9]">
               Phone
             </label>
             <input
               id="phone"
               {...form.register("phone")}
-              className="w-full rounded-2xl border border-primary/10 bg-white px-4 py-3 outline-none transition focus:border-primary"
+              className="w-full rounded-2xl border border-primary/12 bg-[#17110d] px-4 py-3 text-[#f6e5c9] outline-none transition focus:border-primary"
             />
             <p className="text-sm text-red-600">{form.formState.errors.phone?.message}</p>
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="email" className="text-sm font-semibold">
+            <label htmlFor="email" className="text-sm font-semibold text-[#f6e5c9]">
               Email
             </label>
             <input
               id="email"
               type="email"
               {...form.register("email")}
-              className="w-full rounded-2xl border border-primary/10 bg-white px-4 py-3 outline-none transition focus:border-primary"
+              className="w-full rounded-2xl border border-primary/12 bg-[#17110d] px-4 py-3 text-[#f6e5c9] outline-none transition focus:border-primary"
             />
             <p className="text-sm text-red-600">{form.formState.errors.email?.message}</p>
           </div>
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="notes" className="text-sm font-semibold">
+          <label htmlFor="notes" className="text-sm font-semibold text-[#f6e5c9]">
             Notes
           </label>
           <textarea
             id="notes"
             rows={5}
             {...form.register("notes")}
-            className="w-full rounded-[1.5rem] border border-primary/10 bg-white px-4 py-3 outline-none transition focus:border-primary"
+            className="w-full rounded-[1.5rem] border border-primary/12 bg-[#17110d] px-4 py-3 text-[#f6e5c9] outline-none transition focus:border-primary placeholder:text-[#f4e1c6]/35"
             placeholder="Share any preferences, nail art ideas, or details we should know."
           />
           <p className="text-sm text-red-600">{form.formState.errors.notes?.message}</p>

@@ -37,9 +37,7 @@ export async function GET(request: Request) {
   }
 
   try {
-    const backendParams = new URLSearchParams({
-      date,
-    });
+    const backendParams = new URLSearchParams({ date });
 
     if (staffId) {
       backendParams.set("staffId", staffId);

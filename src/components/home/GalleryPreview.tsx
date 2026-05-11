@@ -10,7 +10,7 @@ export function GalleryPreview() {
       <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-3">
           <p className="section-eyebrow">Nail Gallery</p>
-          <h2 className="section-title max-w-3xl">A place to browse finish ideas, colors, and styles before you book.</h2>
+          <h2 className="section-title max-w-3xl text-[#f6e5c9]">A place to browse finish ideas, colors, and styles before you book.</h2>
         </div>
         <Link href="/gallery" className="button-secondary">
           View Full Gallery
