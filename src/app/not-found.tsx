@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { appConfig } from "@/config";
+
 export default function NotFound() {
   return (
     <section className="container-shell flex min-h-[60vh] flex-col items-start justify-center py-20">
@@ -12,7 +14,7 @@ export default function NotFound() {
         <Link href="/" className="button-secondary">
           Back to Home
         </Link>
-        <Link href="/book" className="button-primary">
+        <Link href={appConfig.bookingUrl} className="button-primary">
           Book Now
         </Link>
       </div>

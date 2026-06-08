@@ -45,7 +45,7 @@ export function ContactSection() {
       </div>
 
       <div className="mt-10 flex">
-        <Link href="/book" className="button-primary">
+        <Link href={appConfig.bookingUrl} className="button-primary">
           Book Now
         </Link>
       </div>

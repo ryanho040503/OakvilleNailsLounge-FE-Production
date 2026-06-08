@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Clock3, MapPin, PhoneCall, Sparkles } from "lucide-react";
 
+import { appConfig } from "@/config";
 import { salonInfo } from "@/data/mockData";
 
 export function HeroSection() {
@@ -29,7 +30,7 @@ export function HeroSection() {
                 Oakville Nail Lounge
               </p>
               <h1 className="max-w-4xl text-5xl leading-[0.92] text-[#f5e7d8] sm:text-6xl lg:text-7xl">
-                Elevated nail care with a premium, effortless booking experience.
+                14-day warranty on workmanship defects only. Complimentary repairs for service-related issues caused by our technicians.
               </h1>
               <p className="max-w-2xl text-base leading-8 text-[#f3e6da]/78 sm:text-lg">
                 {salonInfo.tagline} Discover refined manicures, restorative pedicures, and a boutique atmosphere
@@ -39,7 +40,7 @@ export function HeroSection() {
 
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link
-                href="/book"
+                href={appConfig.bookingUrl}
                 className="inline-flex items-center justify-center rounded-full bg-[#d4a04f] px-7 py-3 text-sm font-semibold text-[#2d1a0f] transition hover:bg-[#e0b166]"
               >
                 Book Now

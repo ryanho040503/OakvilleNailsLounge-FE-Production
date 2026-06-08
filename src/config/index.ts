@@ -5,7 +5,10 @@ function trimTrailingSlash(value: string) {
 const apiBaseUrl = trimTrailingSlash(process.env.NEXT_PUBLIC_API_BASE_URL || "");
 
 export const appConfig = {
-  appName: process.env.NEXT_PUBLIC_APP_NAME || "Oakville Nails Lounge",
+  appName:
+    process.env.NEXT_PUBLIC_APP_NAME || "Oakville Nails Lounge (South Oakville Centre)",
+  bookingUrl:
+    process.env.NEXT_PUBLIC_BOOKING_URL || "https://booking.spacepos.net/?id=h5tfJW3JYjU=",
   tagline:
     process.env.NEXT_PUBLIC_APP_TAGLINE ||
     "Beautiful nails, relaxing experience, effortless booking.",

@@ -35,7 +35,7 @@ export function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <Link href="/book" className="button-primary">
+          <Link href={appConfig.bookingUrl} className="button-primary">
             Book Now
           </Link>
         </div>

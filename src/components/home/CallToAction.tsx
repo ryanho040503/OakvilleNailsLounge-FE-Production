@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { appConfig } from "@/config";
+
 export function CallToAction() {
   return (
     <section className="container-shell py-12 lg:py-20">
@@ -14,7 +16,7 @@ export function CallToAction() {
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Link href="/book" className="button-primary">
+            <Link href={appConfig.bookingUrl} className="button-primary">
               Book Now
             </Link>
             <Link href="/contact" className="button-secondary border-primary/30 bg-white/5 text-white hover:bg-white/10">

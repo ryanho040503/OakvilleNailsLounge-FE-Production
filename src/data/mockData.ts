@@ -188,7 +188,7 @@ export const mockGallery: GalleryItem[] = [
 ];
 
 export const salonInfo = {
-  name: "Oakville Nails Lounge",
+  name: "Oakville Nails Lounge (South Oakville Centre)",
   tagline: "Beautiful nails, relaxing experience, effortless booking.",
   phone: "(905) 825-9797",
   email: "hello@oakvillenailslounge.com",

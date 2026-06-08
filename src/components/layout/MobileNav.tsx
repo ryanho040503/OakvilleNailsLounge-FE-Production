@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
+import { appConfig } from "@/config";
+
 interface MobileNavProps {
   navLinks: Array<{ href: string; label: string }>;
 }
@@ -35,7 +37,7 @@ export function MobileNav({ navLinks }: MobileNavProps) {
                 {link.label}
               </Link>
             ))}
-            <Link href="/book" onClick={() => setOpen(false)} className="button-primary mt-2">
+            <Link href={appConfig.bookingUrl} onClick={() => setOpen(false)} className="button-primary mt-2">
               Book Now
             </Link>
           </div>
