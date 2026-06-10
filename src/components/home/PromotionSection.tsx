@@ -8,7 +8,7 @@ export function PromotionSection() {
     <section className="relative overflow-hidden py-12 lg:py-20">
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/IndexBackground.jpg')" }}
+        style={{ backgroundImage: "url('/images/background/chatGPT.png')" }}
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,215,153,0.12),transparent_26%),radial-gradient(circle_at_82%_18%,rgba(212,160,79,0.16),transparent_22%),linear-gradient(180deg,rgba(8,6,4,0.92)_0%,rgba(12,9,7,0.9)_36%,rgba(17,12,9,0.94)_100%)]" />
       <div className="absolute inset-0 opacity-15 [background-image:linear-gradient(rgba(212,160,79,0.18)_1px,transparent_1px),linear-gradient(90deg,rgba(212,160,79,0.18)_1px,transparent_1px)] [background-size:22px_22px]" />
