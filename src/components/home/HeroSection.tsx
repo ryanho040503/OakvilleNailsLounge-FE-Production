@@ -22,8 +22,8 @@ export function HeroSection() {
       <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-[#c28747]/15 blur-3xl" />
       <div className="absolute right-0 top-0 h-full w-full bg-[radial-gradient(circle_at_top_right,rgba(255,224,179,0.1),transparent_18%)]" />
 
-      <div className="container-shell relative flex h-full items-center pt-32 pb-10 sm:pt-36 sm:pb-12 lg:pt-28 lg:pb-16">
-        <div className="grid w-full gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="container-shell relative flex min-h-[100dvh] items-start pt-[calc(env(safe-area-inset-top)+6rem)] pb-10 sm:pt-[calc(env(safe-area-inset-top)+6.5rem)] sm:pb-12 lg:items-center lg:pt-28 lg:pb-16">
+        <div className="grid w-full gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div className="space-y-8 text-white lg:pr-8">
             <div className="space-y-5">
               <p className="text-xs font-semibold uppercase tracking-[0.38em] text-[#d1a35f]">
