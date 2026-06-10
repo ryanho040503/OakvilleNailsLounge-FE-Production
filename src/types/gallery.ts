@@ -5,4 +5,5 @@ export interface GalleryItem {
   style: string;
   color: string;
   description: string;
+  imageSrc: string;
 }

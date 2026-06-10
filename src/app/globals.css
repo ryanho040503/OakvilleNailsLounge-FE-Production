@@ -17,15 +17,46 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #050403;
+  background-image:
+    linear-gradient(180deg, rgba(8, 6, 4, 0.82) 0%, rgba(8, 6, 4, 0.62) 22%, rgba(5, 4, 3, 0.98) 100%),
+    url("/images/Nails.jpeg");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 body {
   min-height: 100vh;
+  background-color: #050403;
   background:
+    linear-gradient(180deg, rgba(8, 6, 4, 0.82) 0%, rgba(8, 6, 4, 0.62) 22%, rgba(5, 4, 3, 0.98) 100%),
+    url("/images/Nails.jpeg"),
     radial-gradient(circle at 15% 10%, rgba(214, 167, 84, 0.12), transparent 20%),
     radial-gradient(circle at 85% 18%, rgba(255, 215, 130, 0.08), transparent 18%),
     radial-gradient(circle at 50% 100%, rgba(120, 71, 28, 0.14), transparent 30%),
     linear-gradient(180deg, #050403 0%, #0b0907 24%, #120d0a 58%, #18110d 100%);
+  background-position:
+    center top,
+    center top,
+    center top,
+    center top,
+    center top,
+    center top;
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat;
+  background-size:
+    cover,
+    cover,
+    auto,
+    auto,
+    auto,
+    auto;
   color: hsl(var(--foreground));
   font-family: var(--font-sans);
 }
@@ -59,6 +90,16 @@ body {
 @layer components {
   .container-shell {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .site-header {
+    padding-top: 15px;
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .hero-section {
+    min-height: 100dvh;
+    height: 100dvh;
   }
 
   .section-eyebrow {

@@ -7,7 +7,7 @@ import { salonInfo } from "@/data/mockData";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[calc(100vh-5rem)] overflow-hidden border-b border-[#7c593f]/15 bg-[#120d0a]">
+    <section className="hero-section relative overflow-hidden border-b border-[#7c593f]/15 bg-[#120d0a]">
       <div className="absolute inset-0">
         <Image
           src="/images/Nails.jpeg"
@@ -22,7 +22,7 @@ export function HeroSection() {
       <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-[#c28747]/15 blur-3xl" />
       <div className="absolute right-0 top-0 h-full w-full bg-[radial-gradient(circle_at_top_right,rgba(255,224,179,0.1),transparent_18%)]" />
 
-      <div className="container-shell relative flex min-h-[calc(100vh-5rem)] items-center py-10 sm:py-12 lg:py-16">
+      <div className="container-shell relative flex h-full items-center pt-32 pb-10 sm:pt-36 sm:pb-12 lg:pt-28 lg:pb-16">
         <div className="grid w-full gap-10 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="space-y-8 text-white lg:pr-8">
             <div className="space-y-5">

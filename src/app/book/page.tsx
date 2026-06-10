@@ -19,7 +19,7 @@ export default async function BookPage({ searchParams }: BookPageProps) {
     ]);
 
     return (
-      <section className="container-shell py-12 lg:py-20">
+      <section className="container-shell pt-32 pb-12 lg:pt-36 lg:pb-20">
         <div className="mb-10 space-y-4">
           <p className="section-eyebrow">Booking</p>
           <h1 className="section-title max-w-3xl text-[#f6e5c9]">Choose one or more services, select a time, and send us your appointment request.</h1>

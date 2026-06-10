@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Clock3 } from "lucide-react";
 
 import { appConfig } from "@/config";
-import { formatPrice } from "@/lib/formatters";
+import { formatServicePrice } from "@/lib/formatters";
 import type { Service } from "@/types/service";
 
 interface ServiceCardProps {
@@ -18,7 +18,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
           <h3 className="mt-2 text-2xl text-[#f6e5c9]">{service.name}</h3>
         </div>
         <div className="rounded-full bg-[#221912] px-4 py-2 text-sm font-semibold text-primary">
-          {formatPrice(service.price)}
+          {formatServicePrice(service)}
         </div>
       </div>
 

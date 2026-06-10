@@ -7,7 +7,7 @@ export default async function ServicesPage() {
     const services = await getServices();
 
     return (
-      <section className="container-shell py-12 lg:py-20">
+      <section className="container-shell pt-32 pb-12 lg:pt-36 lg:pb-20">
         <div className="mb-10 space-y-4">
           <p className="section-eyebrow">Services</p>
           <h1 className="section-title max-w-3xl">Explore signature treatments designed for everyday polish and special occasions.</h1>

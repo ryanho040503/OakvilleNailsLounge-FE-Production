@@ -2,6 +2,7 @@ import { AboutSection } from "@/components/home/AboutSection";
 import { CallToAction } from "@/components/home/CallToAction";
 import { GalleryPreview } from "@/components/home/GalleryPreview";
 import { HeroSection } from "@/components/home/HeroSection";
+import { PromotionSection } from "@/components/home/PromotionSection";
 import { ServicesPreview } from "@/components/home/ServicesPreview";
 import { StaffPreview } from "@/components/home/StaffPreview";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
@@ -15,10 +16,11 @@ export default async function HomePage() {
     const [services, staff] = await Promise.all([getServices(), getStaff()]);
 
     return (
-      <>
-        <HeroSection />
-        <ServicesPreview services={services} />
-        <AboutSection />
+        <>
+          <HeroSection />
+          <PromotionSection />
+          <ServicesPreview services={services} />
+          <AboutSection />
         <GalleryPreview />
         <StaffPreview staff={staff} />
         <TestimonialsSection />

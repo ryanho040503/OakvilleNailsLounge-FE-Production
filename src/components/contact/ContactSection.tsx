@@ -5,7 +5,7 @@ import { appConfig } from "@/config";
 
 export function ContactSection() {
   return (
-    <section className="container-shell py-12 lg:py-20">
+    <section className="container-shell pt-32 pb-12 lg:pt-36 lg:pb-20">
       <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
         <div className="space-y-4">
           <p className="section-eyebrow">Contact</p>

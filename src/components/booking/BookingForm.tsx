@@ -11,6 +11,7 @@ import {
   getAvailableTimeSlots,
   getBookingSummary,
 } from "@/controllers/bookingController";
+import { formatServicePrice } from "@/lib/formatters";
 import { bookingSchema } from "@/lib/validators";
 import type { BookingFormValues, TimeSlotAvailability } from "@/types/booking";
 import type { Service } from "@/types/service";
@@ -209,7 +210,7 @@ export function BookingForm({
                         </p>
                       </div>
                       <p className="shrink-0 text-sm font-semibold text-primary">
-                        ${service.price.toFixed(2)}
+                        {formatServicePrice(service)}
                       </p>
                     </div>
                     <p className="mt-2 text-sm leading-6 text-[#f4e1c6]/68">{service.description}</p>
@@ -328,7 +329,7 @@ export function BookingForm({
                             </span>
                           </span>
                           <span className="shrink-0 text-sm font-semibold text-primary">
-                            ${service.price.toFixed(2)}
+                            {formatServicePrice(service)}
                           </span>
                         </label>
                       ))}

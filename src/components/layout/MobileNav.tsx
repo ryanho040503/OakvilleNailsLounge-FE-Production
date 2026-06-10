@@ -25,7 +25,7 @@ export function MobileNav({ navLinks }: MobileNavProps) {
       </button>
 
       {open ? (
-        <div className="absolute inset-x-4 top-24 glass-panel p-5">
+        <div className="absolute inset-x-4 top-[calc(env(safe-area-inset-top)+6rem)] glass-panel p-5">
           <div className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <Link

@@ -1,9 +1,20 @@
-export function formatPrice(price: number) {
+export function formatPrice(
+  price: number,
+  options: {
+    minimumFractionDigits?: number;
+    maximumFractionDigits?: number;
+  } = {},
+) {
   return new Intl.NumberFormat("en-CA", {
     style: "currency",
     currency: "CAD",
-    minimumFractionDigits: 0,
+    minimumFractionDigits: options.minimumFractionDigits ?? 0,
+    maximumFractionDigits: options.maximumFractionDigits ?? 2,
   }).format(price);
+}
+
+export function formatServicePrice(service: { price: number; priceLabel?: string }) {
+  return service.priceLabel ?? formatPrice(service.price, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export function initialsFromName(name: string) {

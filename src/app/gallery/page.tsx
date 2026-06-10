@@ -6,7 +6,7 @@ import { mockGallery } from "@/data/mockData";
 
 export default function GalleryPage() {
   return (
-    <section className="container-shell py-12 lg:py-20">
+    <section className="container-shell pt-32 pb-12 lg:pt-36 lg:pb-20">
       <div className="mb-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
         <div className="space-y-4">
           <p className="section-eyebrow">Gallery</p>

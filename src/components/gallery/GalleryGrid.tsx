@@ -1,11 +1,14 @@
 "use client";
 
+import Image from "next/image";
+
 import type { GalleryItem } from "@/types/gallery";
 
 interface GalleryGridProps {
   items: GalleryItem[];
   limit?: number;
   groupByCategory?: boolean;
+  horizontal?: boolean;
 }
 
 const bookingCategories = [
@@ -19,40 +22,43 @@ const bookingCategories = [
   "Take Off",
 ] as const;
 
-const paletteStyles = [
-  "from-[#1b130e] via-[#2c1c12] to-[#0c0907]",
-  "from-[#23170f] via-[#322012] to-[#110c08]",
-  "from-[#16110d] via-[#3c2716] to-[#120d09]",
-  "from-[#22160f] via-[#342116] to-[#100b08]",
-  "from-[#1d140e] via-[#2f1d12] to-[#0e0907]",
-  "from-[#20150e] via-[#3a2413] to-[#100b07]",
-];
-
-function GalleryCards({ items }: { items: GalleryItem[] }) {
+function GalleryCards({
+  items,
+  horizontal = false,
+}: {
+  items: GalleryItem[];
+  horizontal?: boolean;
+}) {
   return (
-    <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {items.map((item, index) => (
-        <article key={item.id} className="glass-panel overflow-hidden bg-[#120d0a]/92">
-          <div className={`h-64 bg-gradient-to-br ${paletteStyles[index % paletteStyles.length]} p-5`}>
-            <div className="flex h-full flex-col justify-between rounded-[1.6rem] border border-primary/20 bg-black/20 p-5 backdrop-blur-sm">
-              <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.2em] text-primary/90">
+    <div
+      className={
+        horizontal
+          ? "flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 pr-4 scroll-smooth touch-pan-x [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          : "grid gap-6 md:grid-cols-2 xl:grid-cols-3"
+      }
+    >
+      {items.map((item) => (
+        <article
+          key={item.id}
+          className={`glass-panel overflow-hidden bg-[#120d0a]/92 ${horizontal ? "w-[280px] shrink-0 snap-start sm:w-[320px]" : ""}`}
+        >
+          <div className="relative aspect-[4/5]">
+            <Image
+              src={item.imageSrc}
+              alt={item.title}
+              fill
+              className="object-cover"
+              sizes={horizontal ? "320px" : "(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 100vw"}
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,5,4,0.05)_0%,rgba(7,5,4,0.2)_45%,rgba(7,5,4,0.86)_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 p-5">
+              <div className="flex items-center justify-between gap-4 text-xs font-semibold uppercase tracking-[0.2em] text-primary/90">
                 <span>{item.style}</span>
                 <span>{item.color}</span>
               </div>
-              <div className="grid grid-cols-5 gap-2">
-                {Array.from({ length: 10 }, (_, nailIndex) => (
-                  <div
-                    key={`${item.id}-${nailIndex}`}
-                    className="h-12 rounded-full border border-primary/20 bg-[linear-gradient(180deg,rgba(255,227,178,0.95),rgba(212,160,79,0.7))] shadow-[0_8px_20px_rgba(212,160,79,0.15)]"
-                  />
-                ))}
-              </div>
+              <h3 className="mt-3 text-2xl text-[#f6e5c9]">{item.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-[#f4e1c6]/72">{item.description}</p>
             </div>
-          </div>
-          <div className="p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary/80">{item.category}</p>
-            <h3 className="mt-3 text-2xl text-[#f6e5c9]">{item.title}</h3>
-            <p className="mt-3 text-sm leading-7 text-[#f4e1c6]/68">{item.description}</p>
           </div>
         </article>
       ))}
@@ -76,7 +82,7 @@ export function GalleryGrid({ items, limit, groupByCategory = false }: GalleryGr
               </div>
 
               {categoryItems.length > 0 ? (
-                <GalleryCards items={categoryItems} />
+                <GalleryCards items={categoryItems} horizontal />
               ) : (
                 <p className="text-sm leading-7 text-[#f4e1c6]/60">Gallery items for this category are coming soon.</p>
               )}
@@ -87,7 +93,5 @@ export function GalleryGrid({ items, limit, groupByCategory = false }: GalleryGr
     );
   }
 
-  return (
-    <GalleryCards items={renderedItems} />
-  );
+  return <GalleryCards items={renderedItems} horizontal />;
 }

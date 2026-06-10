@@ -5,5 +5,6 @@ export interface Service {
   description: string;
   duration_minutes: number;
   price: number;
+  priceLabel?: string;
   is_active: boolean;
 }
