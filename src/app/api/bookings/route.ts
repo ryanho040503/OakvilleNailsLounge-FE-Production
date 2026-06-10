@@ -11,7 +11,10 @@ export async function POST(request: Request) {
   try {
     const body = (await request.json()) as BookingFormValues;
     const values = bookingSchema.parse(body);
-    const services = (await getServices()).filter((service) => values.serviceIds.includes(service.id));
+    const services = (await getServices()).filter(
+      (service): service is NonNullable<typeof service> =>
+        service !== null && values.serviceIds.includes(service.id)
+    );
     const response = await fetch(appConfig.apiRoutes.bookings, {
       method: "POST",
       headers: {

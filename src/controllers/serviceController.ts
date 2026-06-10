@@ -93,7 +93,7 @@ function getCategorySortIndex(category: string) {
   return index === -1 ? Number.MAX_SAFE_INTEGER : index;
 }
 
-function normalizeService(service: Service) {
+function normalizeService(service: Service): Service | null {
   const override = serviceDisplayOverrides[service.id];
 
   if (override?.hidden) {
@@ -106,15 +106,20 @@ function normalizeService(service: Service) {
     return null;
   }
 
-  return {
+  const normalizedService: Service = {
     ...service,
     name: override?.name ?? service.name,
     category: normalizedCategory,
-    priceLabel: override?.priceLabel,
   };
+
+  if (override?.priceLabel !== undefined) {
+    normalizedService.priceLabel = override.priceLabel;
+  }
+
+  return normalizedService;
 }
 
-export async function getServices() {
+export async function getServices(): Promise<Service[]> {
   const response = await fetch(appConfig.apiRoutes.services, {
     cache: "no-store",
   });
@@ -130,7 +135,7 @@ export async function getServices() {
 
   return payload.data
     .map(normalizeService)
-    .filter((service): service is Service => Boolean(service))
+    .filter((service): service is Service => service !== null)
     .sort((left, right) => {
       const categoryDelta = getCategorySortIndex(left.category) - getCategorySortIndex(right.category);
 
