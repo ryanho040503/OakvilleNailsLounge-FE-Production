@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function AboutSection() {
   const highlights = [
     {
@@ -22,10 +24,15 @@ export function AboutSection() {
     <section className="container-shell py-12 lg:py-20">
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="glass-panel overflow-hidden p-0">
-          <div
-            className="relative min-h-[420px] bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/OakvilleNailsLounge.jpg')" }}
-          >
+          <div className="relative">
+            <Image
+              src="/images/nails/nails1.jpg"
+              alt="Nail design close-up"
+              width={896}
+              height={1195}
+              className="h-auto w-full"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,6,0.22)_0%,rgba(10,8,6,0.48)_100%)]" />
           </div>
         </div>

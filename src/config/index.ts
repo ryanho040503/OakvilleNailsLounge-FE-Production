@@ -13,9 +13,10 @@ export const appConfig = {
     process.env.NEXT_PUBLIC_APP_TAGLINE ||
     "Beautiful nails, relaxing experience, effortless booking.",
   phone: process.env.NEXT_PUBLIC_SALON_PHONE || "(905) 825-9797",
-  email: process.env.NEXT_PUBLIC_SALON_EMAIL || "hello@oakvillenailslounge.com",
+  email: process.env.NEXT_PUBLIC_SALON_EMAIL || "nguyentuananh09061999@gmail.com",
   address:
-    process.env.NEXT_PUBLIC_SALON_ADDRESS || "1515 Rebecca St, Oakville, ON L6L 5G8, Canada",
+    process.env.NEXT_PUBLIC_SALON_ADDRESS ||
+    "1515 Rebecca St, Oakville, ON L6L 5G8, Canada (Beside Gino's Pizza)",
   apiBaseUrl,
   apiRoutes: {
     bookings: apiBaseUrl ? `${apiBaseUrl}/bookings` : "/api/bookings",

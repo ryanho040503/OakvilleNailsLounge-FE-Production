@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Clock3 } from "lucide-react";
 
+import { appConfig } from "@/config";
 import { formatPrice } from "@/lib/formatters";
 import type { Service } from "@/types/service";
 
@@ -28,7 +29,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
           <Clock3 className="h-4 w-4 text-primary" />
           {service.duration_minutes} min
         </div>
-        <Link href={`/book?serviceId=${service.id}`} className="button-secondary px-5 py-2.5">
+        <Link href={appConfig.bookingUrl} className="button-secondary px-5 py-2.5">
           Book
         </Link>
       </div>

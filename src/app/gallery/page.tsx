@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { GalleryGrid } from "@/components/gallery/GalleryGrid";
+import { appConfig } from "@/config";
 import { mockGallery } from "@/data/mockData";
 
 export default function GalleryPage() {
@@ -21,13 +22,13 @@ export default function GalleryPage() {
             Found a style you like? Add it to your booking notes and our team can help tailor the look during your
             appointment request.
           </p>
-          <Link href="/book" className="button-primary mt-5">
+          <Link href={appConfig.bookingUrl} className="button-primary mt-5">
             Book From Gallery
           </Link>
         </div>
       </div>
 
-      <GalleryGrid items={mockGallery} />
+      <GalleryGrid items={mockGallery} groupByCategory />
     </section>
   );
 }

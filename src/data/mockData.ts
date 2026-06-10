@@ -38,7 +38,7 @@ export const mockServices: Service[] = [
   createService("chrome", "Chrome", "Nail Extensions", 20, 15, "Chrome finish for a reflective high-shine nail look."),
   createService("bio-gel-refill", "Bio Gel Refill", "Nail Extensions", 75, 55, "Bio gel refill service to maintain length, shape, and finish."),
   createService("bio-gel-overlay", "Bio Gel Overlay", "Nail Extensions", 75, 60, "A bio gel overlay for flexible strength and natural-looking polish."),
-  createService("bio-gel-full-set", "Bio Gel Full Set", "Nail Extensions", 105, 70, "A complete bio gel set for strength, length, and shine."),
+  createService("bio-gel-full-set", "Bio Gel Full Set", "Nail Extensions", 105, 65, "A complete bio gel set for strength, length, and shine."),
   createService("paraffin-treatment", "Paraffin Treatment", "Add Ons", 15, 15, "A warm paraffin add-on to soften skin and elevate your service."),
   createService("extra-15-foot-massage", "Extra 15 Minutes Foot Massage", "Add Ons", 15, 20, "Extra foot massage time to extend your pedicure relaxation."),
   createService("extra-10-foot-massage", "Extra 10 Minutes Foot Massage", "Add Ons", 10, 15, "A short add-on massage for an extra relaxing finish."),
@@ -94,9 +94,9 @@ export const mockServices: Service[] = [
 
 export const mockStaff: Staff[] = [
   { id: "stf001", name: "Hoang Duy", role: "Staff", bio: "Available for customer bookings and salon appointments.", is_active: true },
-  { id: "andy", name: "andy", role: "Nail Technician", bio: "Experienced in everyday nail care and guest-friendly appointments.", is_active: true },
+  { id: "andy", name: "andy", role: "Nail Technician", bio: "Experienced in everyday nail care and guest-friendly appointments.", image_url: "/images/staff/andy.jpg", is_active: true },
   { id: "emily", name: "EMILY", role: "Nail Technician", bio: "Focused on clean finishes, efficient service, and polished results.", is_active: true },
-  { id: "helen", name: "HELEN", role: "Senior Technician", bio: "Known for steady technique and a calm, detail-oriented approach.", is_active: true },
+  { id: "helen", name: "HELEN", role: "Nail Technician", bio: "Known for steady technique and a calm, detail-oriented approach.", is_active: true },
   { id: "lacci", name: "LACCI", role: "Nail Technician", bio: "Helps guests choose combinations that fit both style and schedule.", is_active: true },
   { id: "lilly", name: "LILLY", role: "Nail Technician", bio: "Brings a warm touch to manicure, pedicure, and add-on services.", is_active: true },
 ];
@@ -146,6 +146,7 @@ export const mockGallery: GalleryItem[] = [
   {
     id: "rose-chrome",
     title: "Rose Chrome Gloss",
+    category: "Nail Extensions",
     style: "Chrome",
     color: "Blush Rose",
     description: "A reflective rosy finish with almond shaping for a soft-luxe statement.",
@@ -153,6 +154,7 @@ export const mockGallery: GalleryItem[] = [
   {
     id: "milk-french",
     title: "Milky French",
+    category: "Manicure",
     style: "French Tips",
     color: "Cream White",
     description: "Clean, modern French detailing with a sheer milky base and square tips.",
@@ -160,6 +162,7 @@ export const mockGallery: GalleryItem[] = [
   {
     id: "gold-swirl",
     title: "Champagne Swirl",
+    category: "Add Ons",
     style: "Nail Art",
     color: "Champagne Gold",
     description: "Fine metallic swirls over a neutral base for an elevated occasion-ready set.",
@@ -167,6 +170,7 @@ export const mockGallery: GalleryItem[] = [
   {
     id: "mocha-glaze",
     title: "Mocha Glaze",
+    category: "Pedicure",
     style: "Gloss Finish",
     color: "Taupe Brown",
     description: "Warm mocha tones paired with a glazed shine that feels polished and understated.",
@@ -174,6 +178,7 @@ export const mockGallery: GalleryItem[] = [
   {
     id: "soft-floral",
     title: "Soft Floral Detail",
+    category: "Combo Services",
     style: "Hand-Painted Art",
     color: "Petal Pink",
     description: "Delicate floral accents that keep the look romantic without feeling too busy.",
@@ -181,6 +186,7 @@ export const mockGallery: GalleryItem[] = [
   {
     id: "midnight-cat-eye",
     title: "Midnight Cat Eye",
+    category: "Kids 12 And Under",
     style: "Magnetic Gel",
     color: "Deep Plum",
     description: "Dimensional shimmer with a dramatic finish for guests wanting a bolder mood.",
@@ -191,8 +197,8 @@ export const salonInfo = {
   name: "Oakville Nails Lounge (South Oakville Centre)",
   tagline: "Beautiful nails, relaxing experience, effortless booking.",
   phone: "(905) 825-9797",
-  email: "hello@oakvillenailslounge.com",
-  address: "1515 Rebecca St, Oakville, ON L6L 5G8, Canada",
+  email: "nguyentuananh09061999@gmail.com",
+  address: "1515 Rebecca St, Oakville, ON L6L 5G8, Canada (Beside Gino's Pizza)",
   hours: ["Mon - Sun: 9:00 AM - 8:00 PM"],
 };
 

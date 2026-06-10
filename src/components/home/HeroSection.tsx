@@ -116,7 +116,7 @@ export function HeroSection() {
                     View Services
                   </Link>
                   <Link
-                    href="/book"
+                    href={appConfig.bookingUrl}
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-primary/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] px-6 py-3 text-sm font-semibold text-white transition hover:border-primary/35 hover:bg-white/10"
                   >
                     Reserve Now

@@ -23,7 +23,7 @@ export function Footer() {
           <Link href="/services" className="block hover:text-primary">
             Services
           </Link>
-          <Link href="/book" className="block hover:text-primary">
+          <Link href={appConfig.bookingUrl} className="block hover:text-primary">
             Booking
           </Link>
           <Link href="/contact" className="block hover:text-primary">
